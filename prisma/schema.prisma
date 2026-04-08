@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum PostStatus {
+  DRAFT
+  REVIEW
+  PUBLISHED
+}
+
+model Post {
+  id               String     @id @default(cuid())
+  sourceUrl        String     @unique
+  status           PostStatus @default(DRAFT)
+  title            String
+  summary          String
+  impactScore      Int
+  riskScore        Int
+  opportunityScore Int
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+}

@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: veltrix-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: veltrix
+      POSTGRES_PASSWORD: veltrix
+      POSTGRES_DB: veltrix
+    ports:
+      - '5432:5432'
+    volumes:
+      - veltrix_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  veltrix_postgres_data:
